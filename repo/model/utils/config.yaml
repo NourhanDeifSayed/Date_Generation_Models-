@@ -1,0 +1,60 @@
+seed: 42
+
+data:
+  path: "../data/data.txt"
+  train_split: 0.8
+  val_split: 0.1
+  test_split: 0.1
+
+tokenizer:
+  day_min: 1
+  day_max: 31
+  month_min: 1
+  month_max: 12
+  year_min: 1800
+  year_max: 2200
+
+training:
+  batch_size: 64
+  epochs: 40
+  learning_rate: 0.0002
+  latent_dim: 32
+  model: "gan"   # options: gan, vae, transformer, diffusion
+
+gan:
+  generator_units: [128, 256, 128]
+  discriminator_units: [128, 64]
+  noise_dim: 64
+  learning_rate_g: 0.0002
+  learning_rate_d: 0.0002
+
+vae:
+  encoder_units: [128, 64]
+  decoder_units: [64, 128]
+  latent_dim: 32
+  learning_rate: 0.001
+  kl_weight: 0.001
+
+transformer:
+  vocab_size: 64
+  d_model: 128
+  n_heads: 4
+  n_layers: 4
+  dff: 256
+  max_seq_len: 16
+  dropout_rate: 0.1
+  learning_rate: 0.0001
+
+diffusion:
+  T: 50
+  beta_start: 0.0001
+  beta_end: 0.02
+  unet_units: [64, 128, 64]
+  learning_rate: 0.0002
+
+logging:
+  level: "INFO"
+  save_dir: "./logs"
+
+weights:
+  save_dir: "./weights"
